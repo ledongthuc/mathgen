@@ -10,24 +10,24 @@ type AdditionResult struct {
 	Sum     int64
 }
 
-func AddIntegers(sumMax int64) AdditionResult {
-	return addIntegerN(getRand(), 2, sumMax)
+func AddIntegers(maxSum int64) AdditionResult {
+	return addIntegerN(getRand(), 2, maxSum)
 }
 
-func AddIntegerN(numberOfAddend int, sumMax int64) AdditionResult {
-	return addIntegerN(getRand(), numberOfAddend, sumMax)
+func AddIntegerN(numberOfAddend int, maxSum int64) AdditionResult {
+	return addIntegerN(getRand(), numberOfAddend, maxSum)
 }
 
-func addIntegerN(r *rand.Rand, numberOfAddend int, sumMax int64) AdditionResult {
-	if numberOfAddend == 0 || sumMax == 0 {
+func addIntegerN(r *rand.Rand, numberOfAddend int, maxSum int64) AdditionResult {
+	if numberOfAddend == 0 || maxSum == 0 {
 		return AdditionResult{}
 	}
-	if sumMax <= int64(numberOfAddend) {
-		addends := make([]int64, sumMax, sumMax)
-		for i := int64(0); i < sumMax; i++ {
+	if maxSum <= int64(numberOfAddend) {
+		addends := make([]int64, maxSum, maxSum)
+		for i := int64(0); i < maxSum; i++ {
 			addends[i] = 1
 		}
-		return AdditionResult{Addends: addends, Sum: sumMax}
+		return AdditionResult{Addends: addends, Sum: maxSum}
 	}
 
 	// Generate fake addend and sum that will use to calculate percent of real SUM
@@ -39,7 +39,7 @@ func addIntegerN(r *rand.Rand, numberOfAddend int, sumMax int64) AdditionResult 
 	}
 
 	// Real sum will be generated with (numberOfAddend:SumMax]
-	realSum := r.Int63n(sumMax+1-int64(numberOfAddend)) + int64(numberOfAddend)
+	realSum := r.Int63n(maxSum+1-int64(numberOfAddend)) + int64(numberOfAddend)
 	var calculatingSum int64
 	for index, fakeAddend := range result.Addends {
 		var addend int64
