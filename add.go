@@ -33,7 +33,7 @@ func addIntegerN(r *rand.Rand, numberOfAddend int, maxSum int64) AdditionResult 
 	// Generate fake addend and sum that will use to calculate percent of real SUM
 	result := AdditionResult{Addends: make([]int64, 0, numberOfAddend)}
 	for i := 0; i < numberOfAddend; i++ {
-		addend := int64(rand.Int31()) // make sure the fake addend doesn't reach to limit int64
+		addend := int64(rand.Int31n(10)) // make sure the fake addend doesn't reach to limit int64
 		result.Addends = append(result.Addends, addend)
 		result.Sum += addend // Fake sum
 	}
