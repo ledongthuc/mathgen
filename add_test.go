@@ -85,7 +85,7 @@ func Test_addIntegerN(t *testing.T) {
 				sumMax:         1000,
 			},
 			want: AdditionResult{
-				Addends: []int64{192, 310, 30},
+				Addends: []int64{133, 186, 213},
 				Sum:     532,
 			},
 		},
@@ -97,7 +97,7 @@ func Test_addIntegerN(t *testing.T) {
 				sumMax:         1000,
 			},
 			want: AdditionResult{
-				Addends: []int64{150, 93, 289},
+				Addends: []int64{228, 127, 177},
 				Sum:     532,
 			},
 		},
