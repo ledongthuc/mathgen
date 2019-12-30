@@ -17,7 +17,10 @@ func setupAdditionRoutes(g *echo.Group) {
 		if valid, err := request.Valid(); !valid {
 			return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 		}
-		result := mathgen.AddIntegerN(request.NumberOfAddend, request.MaxSum)
+		result, err := mathgen.AddIntegerN(request.NumberOfAddend, request.MaxSum)
+		if err != nil {
+			return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
+		}
 		return c.JSON(http.StatusOK, messages.AdditionResultFromModel(result))
 	})
 }

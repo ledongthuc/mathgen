@@ -1,33 +1,83 @@
 package mathgen
 
 import (
+	"errors"
+	"fmt"
 	"math"
 	"math/rand"
+	"strconv"
+	"strings"
 )
 
+// Addition Result of addition operator
 type AdditionResult struct {
 	Addends []int64
 	Sum     int64
 }
 
-func AddIntegers(maxSum int64) AdditionResult {
+// String of AdditionResult will present struct data with question answer format a + b + c + ... = sum
+func (a AdditionResult) String() string {
+	switch len(a.Addends) {
+	case 0:
+		return strconv.FormatInt(a.Sum, 10)
+	case 1:
+		return fmt.Sprintf("%d = %d", a.Addends[0], a.Sum)
+	}
+
+	sep := " + "
+	var b strings.Builder
+	b.Grow((len(sep) + 5) * (len(a.Addends) - 1))
+	b.WriteString(strconv.FormatInt(a.Addends[0], 10))
+	for _, addend := range a.Addends[1:] {
+		b.WriteString(sep)
+		b.WriteString(strconv.FormatInt(addend, 10))
+	}
+	b.WriteString(" = ")
+	b.WriteString(strconv.FormatInt(a.Sum, 10))
+	return b.String()
+}
+
+/*AddIntegers generate a operator with sum of 2 addends.
+maxSum parameter defines maxsimum of Sum result.
+maxSum should be greater than 0.
+if maxSum = 2, addends always is 1 + 1
+*/
+func AddIntegers(maxSum int64) (AdditionResult, error) {
 	return addIntegerN(getRand(), 2, maxSum)
 }
 
-func AddIntegerN(numberOfAddend int, maxSum int64) AdditionResult {
+/*AddIntegerN generate a operator with sum.
+numberOfAddend parameter defines addends in question.
+numberOfAddend should be greater than 1.
+maxSum parameter defines maxsimum of Sum result.
+maxSum should be greater than 0.
+if maxSum is greater than or equal numberOfAddend. Question always has pattern: 1 + 1 + 1 ....
+*/
+func AddIntegerN(numberOfAddend int, maxSum int64) (AdditionResult, error) {
 	return addIntegerN(getRand(), numberOfAddend, maxSum)
 }
 
-func addIntegerN(r *rand.Rand, numberOfAddend int, maxSum int64) AdditionResult {
-	if numberOfAddend == 0 || maxSum == 0 {
-		return AdditionResult{}
+/*addIntegerN generate a operator with sum.
+r is  source of random numbers
+numberOfAddend parameter defines addends in question.
+numberOfAddend should be greater than 1.
+maxSum parameter defines maxsimum of Sum result.
+maxSum should be greater than 0.
+if maxSum is greater than or equal numberOfAddend. Question always has pattern: 1 + 1 + 1 ....
+*/
+func addIntegerN(r *rand.Rand, numberOfAddend int, maxSum int64) (AdditionResult, error) {
+	if numberOfAddend <= 1 {
+		return AdditionResult{}, errors.New("number of addend should be greater than 1")
+	}
+	if maxSum <= 1 {
+		return AdditionResult{}, errors.New("max sum should be greater than 0")
 	}
 	if maxSum <= int64(numberOfAddend) {
 		addends := make([]int64, maxSum, maxSum)
 		for i := int64(0); i < maxSum; i++ {
 			addends[i] = 1
 		}
-		return AdditionResult{Addends: addends, Sum: maxSum}
+		return AdditionResult{Addends: addends, Sum: maxSum}, nil
 	}
 
 	// Generate fake addend and sum that will use to calculate percent of real SUM
@@ -54,5 +104,5 @@ func addIntegerN(r *rand.Rand, numberOfAddend int, maxSum int64) AdditionResult 
 		result.Addends[index] = addend
 	}
 	result.Sum = realSum
-	return result
+	return result, nil
 }
