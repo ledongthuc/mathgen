@@ -25,3 +25,5 @@ docker-push: docker-build
 	docker push $(DOCKER_USERNAME)/$(DOCKER_IMG_NAME):$(DOCKER_VERSION)
 docker-run:
 	docker run -p 8080:8080 $(DOCKER_USERNAME)/$(BINARY_NAME):$(DOCKER_VERSION)
+k8s-apply:
+	kubectl apply -f ./web/k8s/

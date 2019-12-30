@@ -15,4 +15,5 @@ spec:
       containers: 
         - 
           image: "ledongthuc/mathgen-web:latest"
+          imagePullPolicy: Always
           name: http-server
