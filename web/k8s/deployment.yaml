@@ -16,4 +16,4 @@ spec:
         - 
           image: "ledongthuc/mathgen-web:latest"
           imagePullPolicy: Always
-          name: http-server
+          name: mathgen-web

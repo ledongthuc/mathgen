@@ -6,9 +6,10 @@ const defaultRequest = {
 };
 
 function getQuestion() {
-  $('#mathContent').html('loading...');
+  $('#mathContent').html('');
   $('#checkButton').css('display', 'none');
   $('#nextButton').css('display', 'none');
+  $('#loadingButton').css('display', 'block');
 
   $.ajax({
       type: "POST",
@@ -32,12 +33,14 @@ function handleQuestion(data) {
   $('#mathContent').html(question);
   $('#checkButton').css('display', 'block');
   $('#nextButton').css('display', 'none');
+  $('#loadingButton').css('display', 'none');
 }
 
 function handleError(data) {
   $('#mathContent').html('Problem occurs! try again');
   $('#checkButton').css('display', 'none');
   $('#nextButton').css('display', 'block');
+  $('#loadingButton').css('display', 'none');
 }
 
 function checkButtonClick() {

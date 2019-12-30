@@ -54,3 +54,7 @@ h1, h2, h3, h4, h5, h6 {
 .button-group button.nextButton {
   display: none;
 }
+
+.button-group button.loadingButton {
+  display: none;
+}
