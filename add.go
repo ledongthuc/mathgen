@@ -37,34 +37,31 @@ func (a AdditionResult) String() string {
 	return b.String()
 }
 
-/*AddIntegers generate a operator with sum of 2 addends.
-maxSum parameter defines maxsimum of Sum result.
-maxSum should be greater than 0.
-if maxSum = 2, addends always is 1 + 1
-*/
+// AddIntegers generate a operator with sum of 2 addends.
+// maxSum parameter defines maxsimum of Sum result.
+// maxSum should be greater than 0.
+// if maxSum = 2, addends always is 1 + 1
 func AddIntegers(maxSum int64) (AdditionResult, error) {
 	return addIntegerN(getRand(), 2, maxSum)
 }
 
-/*AddIntegerN generate a operator with sum.
-numberOfAddend parameter defines addends in question.
-numberOfAddend should be greater than 1.
-maxSum parameter defines maxsimum of Sum result.
-maxSum should be greater than 0.
-if maxSum is greater than or equal numberOfAddend. Question always has pattern: 1 + 1 + 1 ....
-*/
+// AddIntegerN generate a operator with sum.
+// numberOfAddend parameter defines addends in question.
+// numberOfAddend should be greater than 1.
+// maxSum parameter defines maxsimum of Sum result.
+// maxSum should be greater than 0.
+// if maxSum is greater than or equal numberOfAddend. Question always has pattern: 1 + 1 + 1 ....
 func AddIntegerN(numberOfAddend int, maxSum int64) (AdditionResult, error) {
 	return addIntegerN(getRand(), numberOfAddend, maxSum)
 }
 
-/*addIntegerN generate a operator with sum.
-r is  source of random numbers
-numberOfAddend parameter defines addends in question.
-numberOfAddend should be greater than 1.
-maxSum parameter defines maxsimum of Sum result.
-maxSum should be greater than 0.
-if maxSum is greater than or equal numberOfAddend. Question always has pattern: 1 + 1 + 1 ....
-*/
+// addIntegerN generate a operator with sum.
+// r is  source of random numbers
+// numberOfAddend parameter defines addends in question.
+// numberOfAddend should be greater than 1.
+// maxSum parameter defines maxsimum of Sum result.
+// maxSum should be greater than 0.
+// if maxSum is greater than or equal numberOfAddend. Question always has pattern: 1 + 1 + 1 ....
 func addIntegerN(r *rand.Rand, numberOfAddend int, maxSum int64) (AdditionResult, error) {
 	if numberOfAddend <= 1 {
 		return AdditionResult{}, errors.New("number of addend should be greater than 1")
