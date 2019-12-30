@@ -23,5 +23,5 @@ docker-build:
 	docker build -t $(DOCKER_USERNAME)/$(DOCKER_IMG_NAME):$(DOCKER_VERSION) .
 docker-push: docker-build
 	docker push $(DOCKER_USERNAME)/$(DOCKER_IMG_NAME):$(DOCKER_VERSION)
-docker-run: docker-build
+docker-run:
 	docker run -p 8080:8080 $(DOCKER_USERNAME)/$(BINARY_NAME):$(DOCKER_VERSION)
