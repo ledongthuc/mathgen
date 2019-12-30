@@ -1,5 +1,5 @@
 body {
-  font-family: 'Zilla Slab', serif;
+  font-family: Roboto, serif;
   color: #080808;
 }
 
@@ -9,15 +9,15 @@ h1, h2, h3, h4, h5, h6 {
 
 .title {
   text-align: center;
+  font-size: 6vmin;
 }
 
 .math-block {
-  font-family: Roboto, serif;
-  font-size: 10vmin;
+  font-size: 16vmin;
   text-align: center;
   transform: translate(-50%, -50%);
   width: 80%;
-  height: 300px;
+  height: 20vmin;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -35,10 +35,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .button-group button {
   width: 100%;
-  height: 100px;
+  height: 20vmin;
   border: none transparent;
   font-family: 'Montserrat', sans-serif;
-  font-size: 5vmin;
+  font-size: 6vmin;
   background-color: #bdbdbd;
   outline: none;
 }

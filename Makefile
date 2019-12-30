@@ -16,7 +16,7 @@ test:
 build: 
 	$(GOBUILD) -o $(BUILDPATH)/$(BINARY_NAME) -v ./web/main.go
 run:
-	$(GORUN) ./web/main.go
+	ASSET_PATH=web/assets $(GORUN) ./web/main.go
 docker-clean:
 	docker rmi --force $(DOCKER_USERNAME)/$(DOCKER_IMG_NAME):$(DOCKER_VERSION)
 docker-build:
