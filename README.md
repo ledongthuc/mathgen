@@ -62,4 +62,6 @@ Response:
 
 Local: http://localhost:8080
 
+Free site: https://mathgen.thuc.cpace
+
 ![Demo](https://user-images.githubusercontent.com/1828895/71580301-55574b00-2b00-11ea-9b2f-ace31dc5cbb7.gif)
