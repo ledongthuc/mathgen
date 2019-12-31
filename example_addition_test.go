@@ -11,11 +11,6 @@ func ExampleAddIntegers() {
 	fmt.Println("Addends:", questionAndAnswers.Addends)
 	fmt.Println("Sum:", questionAndAnswers.Sum)
 	fmt.Println("Format:", questionAndAnswers.String())
-
-	// Output:
-	// Addends: [9 8]
-	// Sum: 17
-	// Format: 9 + 8 = 17
 }
 
 func ExampleAddIntegerN() {
@@ -23,9 +18,4 @@ func ExampleAddIntegerN() {
 	fmt.Println("Addends:", questionAndAnswers.Addends)
 	fmt.Println("Sum:", questionAndAnswers.Sum)
 	fmt.Println("Format:", questionAndAnswers.String())
-
-	// Output:
-	// Addends: [9 8]
-	// Sum: 17
-	// Format: 9 + 8 = 17
 }
