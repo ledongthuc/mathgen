@@ -8,7 +8,7 @@ This repository will evolue frequently, I think, to support more topic.
 
 ## Use as library
 
-Install library
+Install library:
 
 ```
   go get -u github.com/ledongthuc/mathgen
