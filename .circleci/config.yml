@@ -7,5 +7,6 @@ jobs:
     working_directory: /go/src/github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME
     steps:
       - checkout
+      - run: pwd
       - run: go get -v -t -d ./...
       - run: go test -v ./...
