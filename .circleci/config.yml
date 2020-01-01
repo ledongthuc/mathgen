@@ -31,4 +31,4 @@ jobs:
           record: true
           resource-name: web/k8s
 orbs:
-  kubernetes: circleci/kubernetes@0.11.0
+  kube-orb: circleci/kubernetes@0.11.0
