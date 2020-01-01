@@ -32,7 +32,7 @@ jobs:
           container-image-updates: $CIRCLE_PROJECT_USERNAME/$DOCKER_APP_NAME:$TAG
           get-rollout-status: true
           record: true
-          resource-name: web/k8s
+          resource-name: deployment/mathgen-web-deployment
 workflows:
   version: 2
   build-master:
