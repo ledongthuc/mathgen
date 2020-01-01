@@ -13,7 +13,7 @@ jobs:
       - run: go test -v ./...
 
       # Build and push docker image
-      - setup_remote_docker:
+      - setup_remote_docker
           # docker_layer_caching: true
       - run: |
           TAG=0.0.$CIRCLE_BUILD_NUM
