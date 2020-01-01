@@ -25,10 +25,22 @@ jobs:
 
       # Trigger deployment
       - kube-orb/install-kubectl
+      - install_and_initialize_cli:
+          cluster: $K8S_CLUSTER_NAME
+          digitalocean-access-token: DIGITALOCEAN_ACCESS_TOKEN
       - kube-orb/update-container-image:
           container-image-updates: $CIRCLE_PROJECT_USERNAME/$DOCKER_APP_NAME:$TAG
           get-rollout-status: true
           record: true
           resource-name: web/k8s
+workflows:
+  version: 2
+  build-master:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: master
 orbs:
   kube-orb: circleci/kubernetes@0.11.0
+  digitalocean-orb: digitalocean/k8s@0.1.1
