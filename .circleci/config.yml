@@ -30,6 +30,5 @@ jobs:
           get-rollout-status: true
           record: true
           resource-name: web/k8s
-
 orbs:
   kubernetes: circleci/kubernetes@0.11.0
