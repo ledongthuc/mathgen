@@ -25,7 +25,7 @@ jobs:
 
       # Trigger deployment
       - kube-orb/install-kubectl
-      - install_and_initialize_cli:
+      - digitalocean-orb/install_and_initialize_cli:
           cluster: $K8S_CLUSTER_NAME
           digitalocean-access-token: DIGITALOCEAN_ACCESS_TOKEN
       - kube-orb/update-container-image:
