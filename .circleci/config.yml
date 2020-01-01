@@ -33,6 +33,7 @@ jobs:
           get-rollout-status: true
           record: true
           resource-name: web/k8s
+
 workflows:
   version: 2
   build-master:
