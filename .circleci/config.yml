@@ -16,10 +16,10 @@ jobs:
       - setup_remote_docker:
         docker_layer_caching: true
       - run: |
-        TAG=0.0.$CIRCLE_BUILD_NUM
-        docker build -t $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME:$TAG -t $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME:latest .
-        echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-        docker push $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME:$TAG
-        docker push $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME:latest
+          TAG=0.0.$CIRCLE_BUILD_NUM
+          docker build -t $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME:$TAG -t $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME:latest .
+          echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+          docker push $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME:$TAG
+          docker push $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME:latest
 
       # Trigger deployment
