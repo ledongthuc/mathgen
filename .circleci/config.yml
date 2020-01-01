@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 jobs:
   build:
     docker:
@@ -24,3 +24,12 @@ jobs:
           docker push $CIRCLE_PROJECT_USERNAME/$DOCKER_APP_NAME:latest
 
       # Trigger deployment
+      - kube-orb/install-kubectl
+      - kube-orb/update-container-image:
+          container-image-updates: $CIRCLE_PROJECT_USERNAME/$DOCKER_APP_NAME:$TAG
+          get-rollout-status: true
+          record: true
+          resource-name: web/k8s
+
+orbs:
+  kubernetes: circleci/kubernetes@0.11.0
