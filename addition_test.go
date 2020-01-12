@@ -214,3 +214,59 @@ func TestAdditionResult_String(t *testing.T) {
 		})
 	}
 }
+
+func TestAdditionResult_StringQuestion(t *testing.T) {
+	type fields struct {
+		Addends []int64
+		Sum     int64
+	}
+	tests := []struct {
+		name   string
+		fields fields
+		want   string
+	}{
+		{
+			name: "Lengh of addends is 0",
+			fields: fields{
+				Addends: []int64{},
+				Sum:     0,
+			},
+			want: "0",
+		},
+		{
+			name: "Lengh of addends is 1",
+			fields: fields{
+				Addends: []int64{5},
+				Sum:     5,
+			},
+			want: "5 = ",
+		},
+		{
+			name: "Lengh of addends is 2",
+			fields: fields{
+				Addends: []int64{101, 67},
+				Sum:     168,
+			},
+			want: "101 + 67 = ",
+		},
+		{
+			name: "Lengh of addends is 3",
+			fields: fields{
+				Addends: []int64{101, 67, 201},
+				Sum:     369,
+			},
+			want: "101 + 67 + 201 = ",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			a := AdditionResult{
+				Addends: tt.fields.Addends,
+				Sum:     tt.fields.Sum,
+			}
+			if got := a.StringQuestion(); got != tt.want {
+				t.Errorf("AdditionResult.StringQuestion() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

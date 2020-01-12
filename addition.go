@@ -17,11 +17,19 @@ type AdditionResult struct {
 
 // String of AdditionResult will present struct data with question answer format a + b + c + ... = sum
 func (a AdditionResult) String() string {
+	if len(a.Addends) == 0 {
+		return a.StringQuestion()
+	}
+	return a.StringQuestion() + strconv.FormatInt(a.Sum, 10)
+}
+
+// StringQuestion of AdditionResult will present struct data with question  format a + b + c + ... =
+func (a AdditionResult) StringQuestion() string {
 	switch len(a.Addends) {
 	case 0:
 		return strconv.FormatInt(a.Sum, 10)
 	case 1:
-		return fmt.Sprintf("%d = %d", a.Addends[0], a.Sum)
+		return fmt.Sprintf("%d = ", a.Addends[0])
 	}
 
 	sep := " + "
@@ -33,7 +41,6 @@ func (a AdditionResult) String() string {
 		b.WriteString(strconv.FormatInt(addend, 10))
 	}
 	b.WriteString(" = ")
-	b.WriteString(strconv.FormatInt(a.Sum, 10))
 	return b.String()
 }
 
