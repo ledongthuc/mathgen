@@ -8,7 +8,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .title {
-  text-align: center;
+  text-align: left;
   font-size: 6vmin;
 }
 
@@ -25,12 +25,11 @@ h1, h2, h3, h4, h5, h6 {
 
 .button-group {
   margin: auto;
-  padding: auto;
-  text-align: center;
   position: fixed;
   bottom: 0px;
   left: 0px;
   width: 100%;
+  text-align: right;
 }
 
 .button-group button {
@@ -41,10 +40,13 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 6vmin;
   background-color: #bdbdbd;
   outline: none;
+  text-align: inherit;
+  padding-right: 30px;
 }
 
 .button-group button:active {
   background-color: #d2d2d2;
+  cursor: pointer;
 }
 
 .button-group button.checkButton {
@@ -57,4 +59,40 @@ h1, h2, h3, h4, h5, h6 {
 
 .button-group button.loadingButton {
   display: none;
+}
+
+.settingButton, .backButton {
+  font-size: inherit;
+  background: transparent;
+  border: transparent;
+  cursor: pointer;
+  padding: 0px 15px;
+}
+
+.setting {
+  display: none;
+}
+
+.topics {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.topic {
+  font-size: 16vmin;
+  text-align: center;
+  cursor: pointer;
+  font-size: 90px;
+  text-align: center;
+  cursor: pointer;
+  width: 100px;
+  height: 100px;
+  vertical-align: middle;
+  line-height: 100px;
+  border: 1px #d2d2d2 solid;
+}
+
+.topic.active {
+  background-color: #d2d2d2;
 }

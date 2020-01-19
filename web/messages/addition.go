@@ -25,19 +25,19 @@ func AdditionResultFromModel(model mathgen.AdditionResult) AdditionResult {
 }
 
 type AdditionRequest struct {
-	NumberOfAddend int   `json:"number_of_addend"`
-	MaxSum         int64 `json:"max_sum"`
+	NumberOfAddends int   `json:"number_of_addends"`
+	MaxSum          int64 `json:"max_sum"`
 }
 
 func (a AdditionRequest) Valid() (bool, error) {
-	if a.NumberOfAddend == 0 {
-		return false, fmt.Errorf("Number of addend's required")
+	if a.NumberOfAddends == 0 {
+		return false, fmt.Errorf("Number of addends's required")
 	}
 	if a.MaxSum == 0 {
 		return false, fmt.Errorf("Maximum sum should be greater than 0")
 	}
-	if a.MaxSum < int64(a.NumberOfAddend) {
-		return false, fmt.Errorf("Maximum sum should be greater than or equal %d", int64(a.NumberOfAddend))
+	if a.MaxSum < int64(a.NumberOfAddends) {
+		return false, fmt.Errorf("Maximum sum should be greater than or equal %d", int64(a.NumberOfAddends))
 	}
 	return true, nil
 }

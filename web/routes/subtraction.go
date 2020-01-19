@@ -8,19 +8,19 @@ import (
 	"github.com/ledongthuc/mathgen/web/messages"
 )
 
-func setupAdditionRoutes(g *echo.Group) {
+func setupSubtractionRoutes(g *echo.Group) {
 	g.POST("/generate", func(c echo.Context) error {
-		var request messages.AdditionRequest
+		var request messages.SubtractionRequest
 		if err := c.Bind(&request); err != nil {
 			return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 		}
 		if valid, err := request.Valid(); !valid {
 			return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 		}
-		result, err := mathgen.AddIntegerN(request.NumberOfAddends, request.MaxSum)
+		result, err := mathgen.SubtractIntegerN(request.NumberOfSubtrahends, request.MaxMinuend)
 		if err != nil {
 			return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
 		}
-		return c.JSON(http.StatusOK, messages.AdditionResultFromModel(result))
+		return c.JSON(http.StatusOK, messages.SubtractionResultFromModel(result))
 	})
 }
