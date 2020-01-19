@@ -7,14 +7,18 @@ import (
 )
 
 type AdditionResult struct {
-	Addends []int64 `json:"addends"`
-	Sum     int64   `json:"sum"`
+	Addends  []int64 `json:"addends"`
+	Sum      int64   `json:"sum"`
+	Question string  `json:"question"`
+	Result   string  `json:"result"`
 }
 
 func AdditionResultFromModel(model mathgen.AdditionResult) AdditionResult {
 	result := AdditionResult{
-		Sum:     model.Sum,
-		Addends: make([]int64, len(model.Addends)),
+		Sum:      model.Sum,
+		Addends:  make([]int64, len(model.Addends)),
+		Question: model.StringQuestion(),
+		Result:   model.String(),
 	}
 	copy(result.Addends, model.Addends)
 	return result

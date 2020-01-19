@@ -29,7 +29,7 @@ function handleQuestion(data) {
     return;
   }
   currentResult = data;
-  const question = `${currentResult.addends.join(' + ')} = `;
+  const question = currentResult.question;
   $('#mathContent').html(question);
   $('#checkButton').css('display', 'block');
   $('#nextButton').css('display', 'none');
@@ -44,8 +44,8 @@ function handleError(data) {
 }
 
 function checkButtonClick() {
-  const question = `${currentResult.addends.join(' + ')} = ${currentResult.sum}`;
-  $('#mathContent').html(question);
+  const result = currentResult.result;
+  $('#mathContent').html(result);
   $('#checkButton').css('display', 'none');
   $('#nextButton').css('display', 'block');
 }
