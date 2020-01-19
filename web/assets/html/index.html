@@ -15,12 +15,32 @@
     <link rel="stylesheet" href="/styles/style.css?v=1.1">
   </head>
   <body>
-    <h1 class="title">Math Generator</h1>
-    <div id="mathContent" class="math-block">loading...</div>
-    <div class="button-group">
-        <button id="checkButton" class="checkButton">Check...</button>
-        <button id="nextButton" class="checkButton">Next</button>
-        <button id="loadingButton" class="loadingButton">Loading...</button>
+    <div id="math" class="math">
+      <div class="header">
+        <h1 class="title">
+          <button id="settingButton" class="settingButton">⚙</button>
+          <span>Math Generator</span>
+        </h1>
+      </div>
+      <div id="mathContent" class="math-block">loading...</div>
+      <div class="button-group">
+          <button id="checkButton" class="checkButton">Check...</button>
+          <button id="nextButton" class="checkButton">Next</button>
+      </div>
+    </div>
+    <div id="setting" class="setting">
+      <div class="header">
+        <h1 class="title">
+          <button id="backButton" class="backButton">←</button>
+          <span>Setting</span>
+        </h1>
+        <div class="settingContent">
+          <div class="topics">
+            <div class="topic" topic="addition">+</div>
+            <div class="topic" topic="subtraction">-</div>
+          </div>
+        </div>
+      </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="/scripts/script.js?v=1.1"></script>

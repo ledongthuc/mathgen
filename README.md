@@ -37,12 +37,14 @@ docker run -p 8080:8080 ledongthuc/mathgen-web:latest
 
 ### API
 
+#### Addition
+
 POST `http://localhost:8080/api/addition/generate`
 
 Request:
 ```
 {
-  "number_of_addend": 2,
+  "number_of_addends 2,
   "max_sum": 10
 }
 ```
@@ -51,10 +53,37 @@ Response:
 ```
 {
     "addends": [
-        1,
-        1
+        3,
+        4
     ],
-    "sum": 2
+    "sum": 7,
+    "question": "3 + 4 = ",
+    "result": "3 + 4 = 7"
+}
+```
+
+#### Subtraction
+
+POST `http://localhost:8080/api/subtraction/generate`
+
+Request:
+```
+{
+  "max_minuend": 20,
+  "number_of_subtrahends": 1
+}
+```
+
+Response:
+```
+{
+    "minuend": 9,
+    "subtrahends": [
+        5
+    ],
+    "difference": 4,
+    "question": "9 - 5 = ",
+    "result": "9 - 5 = 4"
 }
 ```
 

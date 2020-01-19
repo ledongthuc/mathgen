@@ -52,26 +52,26 @@ func AddIntegers(maxSum int64) (AdditionResult, error) {
 }
 
 // AddIntegerN generate a operator with sum.
-// Parameter numberOfAddend defines addends in question, it should be greater than 1.
+// Parameter numberOfAddends defines addends in question, it should be greater than 1.
 // Parameter maxSum defines maxsimum of Sum result, it should be greater than 0.
-// If maxSum is greater than or equal numberOfAddend. Question always has pattern: 1 + 1 + 1 ....
-func AddIntegerN(numberOfAddend int, maxSum int64) (AdditionResult, error) {
-	return addIntegerN(getRand(), numberOfAddend, maxSum)
+// If maxSum is greater than or equal numberOfAddends. Question always has pattern: 1 + 1 + 1 ....
+func AddIntegerN(numberOfAddends int, maxSum int64) (AdditionResult, error) {
+	return addIntegerN(getRand(), numberOfAddends, maxSum)
 }
 
 // addIntegerN generate a operator with sum.
 // r is  source of random numbers
-// Parameter numberOfAddend defines addends in question, it should be greater than 1.
+// Parameter numberOfAddends defines addends in question, it should be greater than 1.
 // Parameter maxSum defines maxsimum of Sum result, it should be greater than 0.
-// If maxSum is greater than or equal numberOfAddend. Question always has pattern: 1 + 1 + 1 ....
-func addIntegerN(r *rand.Rand, numberOfAddend int, maxSum int64) (AdditionResult, error) {
-	if numberOfAddend <= 1 {
+// If maxSum is greater than or equal numberOfAddends. Question always has pattern: 1 + 1 + 1 ....
+func addIntegerN(r *rand.Rand, numberOfAddends int, maxSum int64) (AdditionResult, error) {
+	if numberOfAddends <= 1 {
 		return AdditionResult{}, errors.New("number of addend should be greater than 1")
 	}
 	if maxSum <= 1 {
 		return AdditionResult{}, errors.New("max sum should be greater than 0")
 	}
-	if maxSum <= int64(numberOfAddend) {
+	if maxSum <= int64(numberOfAddends) {
 		addends := make([]int64, maxSum, maxSum)
 		for i := int64(0); i < maxSum; i++ {
 			addends[i] = 1
@@ -80,8 +80,8 @@ func addIntegerN(r *rand.Rand, numberOfAddend int, maxSum int64) (AdditionResult
 	}
 
 	// Generate fake addend and sum that will use to calculate percent of real SUM
-	result := AdditionResult{Addends: make([]int64, 0, numberOfAddend)}
-	for i := 0; i < numberOfAddend; i++ {
+	result := AdditionResult{Addends: make([]int64, 0, numberOfAddends)}
+	for i := 0; i < numberOfAddends; i++ {
 		// make sure the fake addend doesn't reach to limit int64
 		// random from [0-9) then +1 and we will have [1-10)
 		addend := int64(rand.Int31n(9) + 1)
@@ -89,8 +89,8 @@ func addIntegerN(r *rand.Rand, numberOfAddend int, maxSum int64) (AdditionResult
 		result.Sum += addend // Fake sum
 	}
 
-	// Real sum will be generated with (numberOfAddend:SumMax]
-	realSum := r.Int63n(maxSum+1-int64(numberOfAddend)) + int64(numberOfAddend)
+	// Real sum will be generated with (numberOfAddends:SumMax]
+	realSum := r.Int63n(maxSum+1-int64(numberOfAddends)) + int64(numberOfAddends)
 	var calculatingSum int64
 	for index, fakeAddend := range result.Addends {
 		var addend int64
