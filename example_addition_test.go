@@ -10,12 +10,14 @@ func ExampleAddIntegers() {
 	questionAndAnswers, _ := mathgen.AddIntegers(20)
 	fmt.Println("Addends:", questionAndAnswers.Addends)
 	fmt.Println("Sum:", questionAndAnswers.Sum)
-	fmt.Println("Format:", questionAndAnswers.String())
+	fmt.Println("Print Question:", questionAndAnswers.StringQuestion())
+	fmt.Println("Print Full:", questionAndAnswers.String())
 }
 
 func ExampleAddIntegerN() {
 	questionAndAnswers, _ := mathgen.AddIntegerN(3, 20)
 	fmt.Println("Addends:", questionAndAnswers.Addends)
 	fmt.Println("Sum:", questionAndAnswers.Sum)
-	fmt.Println("Format:", questionAndAnswers.String())
+	fmt.Println("Print Question:", questionAndAnswers.StringQuestion())
+	fmt.Println("Print Full:", questionAndAnswers.String())
 }
