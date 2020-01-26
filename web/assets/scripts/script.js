@@ -27,8 +27,8 @@ function composeRequestData() {
 
 function getQuestion() {
   $('#mathContent').html('');
-  $('#checkButton').css('display', 'none').attr("disabled");
-  $('#nextButton').css('display', 'none').attr("disabled");
+  $('#checkButton').attr("disabled");
+  $('#nextButton').attr("disabled");
 
   $.ajax({
       type: "POST",

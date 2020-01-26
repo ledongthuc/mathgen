@@ -1,6 +1,6 @@
 # Math generator
 
-[![GoDoc](https://godoc.org/github.com/ledongthuc/mathgen?status.svg)](https://godoc.org/github.com/ledongthuc/mathgen)
+[![CircleCI](https://circleci.com/gh/ledongthuc/mathgen.svg?style=svg)](https://circleci.com/gh/ledongthuc/mathgen) [![Go Report Card](https://goreportcard.com/badge/github.com/ledongthuc/mathgen)](https://goreportcard.com/report/github.com/ledongthuc/mathgen) [![GoDoc](https://godoc.org/github.com/ledongthuc/mathgen?status.svg)](https://godoc.org/github.com/ledongthuc/mathgen)
 
 As a dad, I frequently to play math quiz with my daughter.
 Bu I'm too lazy to frequently to create math questions. This' reason why I create this lib/api/web, that I can help me to generate questions.
@@ -99,4 +99,5 @@ Local: http://localhost:8080
 
 Free site: https://mathgen.thuc.space
 
-![Demo](https://user-images.githubusercontent.com/1828895/71580301-55574b00-2b00-11ea-9b2f-ace31dc5cbb7.gif)
+![demo](https://user-images.githubusercontent.com/1828895/73132049-d0375700-4015-11ea-91f0-ab24f4a15382.gif)
+
