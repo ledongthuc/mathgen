@@ -35,6 +35,12 @@ Start with docker:
 docker run -p 8080:8080 ledongthuc/mathgen-web:latest
 ```
 
+Start from source code:
+
+```
+make clean; make test; make run;
+```
+
 ### API
 
 #### Addition

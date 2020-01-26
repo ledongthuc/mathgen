@@ -10,7 +10,7 @@ DOCKER_VERSION=latest
 
 all: test clean build
 clean:
-	rm -rf $(BUILDPATH); mkdir $(BUILDPATH)
+	go mod tidy; rm -rf $(BUILDPATH); mkdir $(BUILDPATH)
 test: 
 	$(GOTEST) ./...
 build: 
