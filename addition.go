@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-// Addition Result of addition operator
+// AdditionResult of addition operator
 type AdditionResult struct {
 	Addends []int64
 	Sum     int64

@@ -6,6 +6,7 @@ import (
 	"github.com/ledongthuc/mathgen"
 )
 
+// SubtractionResult is result message that will be used to return on API
 type SubtractionResult struct {
 	Minuend     int64   `json:"minuend"`
 	Subtrahends []int64 `json:"subtrahends"`
@@ -14,6 +15,7 @@ type SubtractionResult struct {
 	Result      string  `json:"result"`
 }
 
+// SubtractionResultFromModel converts message from web to request model of Subtraction
 func SubtractionResultFromModel(model mathgen.SubtractionResult) SubtractionResult {
 	result := SubtractionResult{
 		Minuend:     model.Minuend,
@@ -26,11 +28,13 @@ func SubtractionResultFromModel(model mathgen.SubtractionResult) SubtractionResu
 	return result
 }
 
+// SubtractionRequest is request to make a subtract generation from API
 type SubtractionRequest struct {
 	MaxMinuend          int64 `json:"max_minuend"`
 	NumberOfSubtrahends int   `json:"number_of_subtrahends"`
 }
 
+// Valid of SubtractionRequest check the validation of the request message
 func (a SubtractionRequest) Valid() (bool, error) {
 	if a.NumberOfSubtrahends == 0 {
 		return false, fmt.Errorf("Number of subtrahend's required")

@@ -8,13 +8,13 @@ import (
 )
 
 func setupWebRoutes(g *echo.Group) {
-	g.Static("/", getAssetHtmlPath())
+	g.Static("/", getAssetHTMLPath())
 	g.Static("/styles", getAssetStylePath())
 	g.Static("/scripts", getAssetScriptPath())
 	g.Static("/images", getAssetImagesPath())
 }
 
-func getAssetHtmlPath() string {
+func getAssetHTMLPath() string {
 	return fmt.Sprintf("%s/html", getAssetPath())
 }
 
