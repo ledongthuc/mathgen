@@ -10,7 +10,6 @@ const defaultRequestData = {
 function composeRequestURL() {
   const topic = currentSetting ? currentSetting.topic : defaultTopic;
 
-	console.log('DEBUG: composeRequestURL: ', currentSetting);
   return `/api/${topic}/generate`;
 }
 
@@ -68,7 +67,7 @@ function checkButtonClick() {
 }
 
 function nextButtonClick() {
-	getQuestion();
+  getQuestion();
 }
 
 function settingButtonClick() {
@@ -111,6 +110,27 @@ function topicButtonClick() {
   setSetting({ ...currentSetting, topic })
 }
 
+let wakeLockObj = null;
+function acquireWakeup() {
+  if ('keepAwake' in screen) {
+      screen.keepAwake = true;
+      console.log('screen.keepAwake is acquired');
+  } else if ('wakeLock' in navigator) {
+    navigator.wakeLock.request('screen').then((wakeLock) => {
+      wakeLockObj = wakeLock;
+      wakeLockObj.addEventListener('release', () => {
+        console.log('wakeLockObj is released');
+        wakeLockObj = null;
+      });
+      onsole.log('wakeLockObj is acquired');
+    }).catch((err) => {
+      console.error(err);
+    })
+  } else {
+    console.log('Can\'t acquire wake lock')
+  }
+}
+
 $(document).ready(() => {
   currentSetting = loadSetting();
   updateTopicStatus(currentSetting);
@@ -119,5 +139,6 @@ $(document).ready(() => {
   $('#nextButton').bind('click', nextButtonClick); 
   $('#settingButton').bind('click', settingButtonClick); 
   $('#backButton').bind('click', backButtonClick); 
-  $('.topic').bind('click', topicButtonClick) 
+  $('.topic').bind('click', topicButtonClick);
+  acquireWakeup();
 });
