@@ -28,6 +28,10 @@ jobs:
           cluster: $K8S_CLUSTER_NAME
           digitalocean-access-token: DIGITALOCEAN_ACCESS_TOKEN
       - run: |
+          cp ./web/k8s/secret.yaml.template ./secret.yaml
+          sed 's/_ENV_VAR_/$CHROME_ORIGIN_TRIAL/g' ./secret.yaml
+          kubectl apply -f ./secret.yaml
+          rm ./secret.yaml
           TAG=0.0.$CIRCLE_BUILD_NUM
           kubectl set image deployment/$K8S_DEPLOYMENT_NAME $K8S_POD_NAME=$CIRCLE_PROJECT_USERNAME/$DOCKER_APP_NAME:$TAG
 workflows:
