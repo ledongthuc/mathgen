@@ -114,20 +114,13 @@ let wakeLockObj = null;
 function acquireWakeup() {
   if ('keepAwake' in screen) {
       screen.keepAwake = true;
-      console.log('screen.keepAwake is acquired');
   } else if ('wakeLock' in navigator) {
     navigator.wakeLock.request('screen').then((wakeLock) => {
       wakeLockObj = wakeLock;
       wakeLockObj.addEventListener('release', () => {
-        console.log('wakeLockObj is released');
         wakeLockObj = null;
       });
-      onsole.log('wakeLockObj is acquired');
-    }).catch((err) => {
-      console.error(err);
     })
-  } else {
-    console.log('Can\'t acquire wake lock')
   }
 }
 
