@@ -8,6 +8,7 @@ DOCKER_USERNAME=ledongthuc
 DOCKER_IMG_NAME=$(BINARY_NAME)
 DOCKER_VERSION=latest
 CHROME_ORIGIN_TRIAL=XXX
+CHROME_ORIGIN_TRIAL_FILE=./web/k8s/chrome_origin_trial.txt
 
 all: test clean build
 clean:

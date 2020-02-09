@@ -17,3 +17,9 @@ spec:
           image: "ledongthuc/mathgen-web:latest"
           imagePullPolicy: Always
           name: mathgen-web
+          env:
+          - name: CHROME_ORIGIN_TRIAL
+            valueFrom:
+              secretKeyRef:
+                name: mathgen-web-general
+                key: CHROME_ORIGIN_TRIAL
