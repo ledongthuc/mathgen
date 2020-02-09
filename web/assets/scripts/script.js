@@ -113,15 +113,12 @@ function topicButtonClick() {
 let wakeLockObj = null;
 function acquireWakeup() {
   if ('keepAwake' in screen) {
-	  alert("screen.keepAwake: true");
       screen.keepAwake = true;
   } else if ('wakeLock' in navigator) {
     navigator.wakeLock.request('screen').then((wakeLock) => {
       wakeLockObj = wakeLock;
-	  alert("wakeLockObj: ", wakeLockObj);
       wakeLockObj.addEventListener('release', () => {
         wakeLockObj = null;
-	    alert("wakeLockObj: ", wakeLockObj);
       });
     })
   }
