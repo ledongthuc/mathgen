@@ -29,7 +29,7 @@ jobs:
           digitalocean-access-token: DIGITALOCEAN_ACCESS_TOKEN
       - run: |
           CHROME_ORIGIN_TRIAL_BASE_64=$(printf '%q' $(echo $CHROME_ORIGIN_TRIAL | base64))
-          sed "s/_ENV_VAR_/$CHROME_ORIGIN_TRIAL_BASE_64/g" ./web/k8s/secret.yaml.template > ./secret.yaml
+          sed "s/{{CHROME_ORIGIN_TRIAL}}/$CHROME_ORIGIN_TRIAL_BASE_64/g" ./web/k8s/secret.yaml.template > ./secret.yaml
           cat ./secret.yaml
           kubectl apply -f ./secret.yaml
           rm ./secret.yaml
