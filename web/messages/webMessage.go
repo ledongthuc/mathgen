@@ -1,6 +1,7 @@
 package messages
 
 import (
+	"os"
 	"strconv"
 	"time"
 )
@@ -8,11 +9,13 @@ import (
 var currentVersion = strconv.FormatInt(time.Now().UnixNano(), 10)
 
 type WebMessage struct {
-	Version string
+	Version           string
+	ChromeOriginTrial string
 }
 
 func GenerateWebMessage() WebMessage {
 	return WebMessage{
-		Version: currentVersion,
+		Version:           currentVersion,
+		ChromeOriginTrial: os.Getenv("CHROME_ORIGIN_TRIAL"),
 	}
 }

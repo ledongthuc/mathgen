@@ -7,6 +7,7 @@ BINARY_NAME=mathgen-web
 DOCKER_USERNAME=ledongthuc
 DOCKER_IMG_NAME=$(BINARY_NAME)
 DOCKER_VERSION=latest
+CHROME_ORIGIN_TRIAL=XXX
 
 all: test clean build
 clean:
@@ -16,7 +17,9 @@ test:
 build: 
 	$(GOBUILD) -o $(BUILDPATH)/$(BINARY_NAME) -v ./web/main.go
 run:
-	ASSET_PATH=web/assets $(GORUN) ./web/main.go
+	ASSET_PATH=web/assets \
+	CHROME_ORIGIN_TRIAL=$(CHROME_ORIGIN_TRIAL) \
+		$(GORUN) ./web/main.go
 docker-clean:
 	docker rmi --force $(DOCKER_USERNAME)/$(DOCKER_IMG_NAME):$(DOCKER_VERSION)
 docker-build:
