@@ -10,7 +10,6 @@ const defaultRequestData = {
 function composeRequestURL() {
   const topic = currentSetting ? currentSetting.topic : defaultTopic;
 
-	console.log('DEBUG: composeRequestURL: ', currentSetting);
   return `/api/${topic}/generate`;
 }
 
@@ -68,7 +67,7 @@ function checkButtonClick() {
 }
 
 function nextButtonClick() {
-	getQuestion();
+  getQuestion();
 }
 
 function settingButtonClick() {
@@ -111,6 +110,20 @@ function topicButtonClick() {
   setSetting({ ...currentSetting, topic })
 }
 
+let wakeLockObj = null;
+function acquireWakeup() {
+  if ('keepAwake' in screen) {
+      screen.keepAwake = true;
+  } else if ('wakeLock' in navigator) {
+    navigator.wakeLock.request('screen').then((wakeLock) => {
+      wakeLockObj = wakeLock;
+      wakeLockObj.addEventListener('release', () => {
+        wakeLockObj = null;
+      });
+    })
+  }
+}
+
 $(document).ready(() => {
   currentSetting = loadSetting();
   updateTopicStatus(currentSetting);
@@ -119,5 +132,7 @@ $(document).ready(() => {
   $('#nextButton').bind('click', nextButtonClick); 
   $('#settingButton').bind('click', settingButtonClick); 
   $('#backButton').bind('click', backButtonClick); 
-  $('.topic').bind('click', topicButtonClick) 
+  $('.topic').bind('click', topicButtonClick);
+  $(window).focus(acquireWakeup);
+  acquireWakeup();
 });
