@@ -3,6 +3,7 @@ package messages
 import (
 	"os"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -17,7 +18,7 @@ type WebMessage struct {
 func GenerateWebMessage() WebMessage {
 	return WebMessage{
 		Version:           currentVersion,
-		ChromeOriginTrial: os.Getenv("CHROME_ORIGIN_TRIAL"),
+		ChromeOriginTrial: strings.TrimSpace(os.Getenv("CHROME_ORIGIN_TRIAL")),
 		AppName:           "Math Generator",
 	}
 }
