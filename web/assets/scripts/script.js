@@ -140,5 +140,6 @@ $(document).ready(() => {
   $('#settingButton').bind('click', settingButtonClick); 
   $('#backButton').bind('click', backButtonClick); 
   $('.topic').bind('click', topicButtonClick);
+  $(window).focus(acquireWakeup);
   acquireWakeup();
 });
