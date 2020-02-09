@@ -28,7 +28,8 @@ jobs:
           cluster: $K8S_CLUSTER_NAME
           digitalocean-access-token: DIGITALOCEAN_ACCESS_TOKEN
       - run: |
-          sed "s/_ENV_VAR_/$CHROME_ORIGIN_TRIAL/g" ./web/k8s/secret.yaml.template > ./secret.yaml
+          CHROME_ORIGIN_TRIAL_BASE_64=$(echo $CHROME_ORIGIN_TRIAL | base64)
+          sed "s/_ENV_VAR_/$CHROME_ORIGIN_TRIAL_BASE_64/g" ./web/k8s/secret.yaml.template > ./secret.yaml
           cat ./secret.yaml
           kubectl apply -f ./secret.yaml
           rm ./secret.yaml
