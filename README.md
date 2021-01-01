@@ -100,4 +100,3 @@ Local: http://localhost:8080
 Free site: https://mathgen.thuc.space
 
 ![demo](https://user-images.githubusercontent.com/1828895/73132049-d0375700-4015-11ea-91f0-ab24f4a15382.gif)
-
