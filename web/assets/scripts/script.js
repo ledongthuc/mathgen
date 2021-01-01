@@ -32,7 +32,7 @@ const RootComponent = {
         addition: {
           number_of_addends: 2,
           max_sum: 20,
-          min_sum: 20,
+          min_sum: 0,
         },
         subtraction: {
           max_minuend: 20,
