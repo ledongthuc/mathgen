@@ -11,6 +11,7 @@ func Test_addIntegerN(t *testing.T) {
 		r              *rand.Rand
 		numberOfAddend int
 		sumMax         int64
+		sumMin         int64
 	}
 	tests := []struct {
 		name    string
@@ -24,6 +25,7 @@ func Test_addIntegerN(t *testing.T) {
 				r:              rand.New(rand.NewSource(0)),
 				numberOfAddend: 0,
 				sumMax:         10,
+				sumMin:         0,
 			},
 			want:    AdditionResult{},
 			wantErr: true,
@@ -34,6 +36,7 @@ func Test_addIntegerN(t *testing.T) {
 				r:              rand.New(rand.NewSource(0)),
 				numberOfAddend: 1,
 				sumMax:         10,
+				sumMin:         0,
 			},
 			want:    AdditionResult{},
 			wantErr: true,
@@ -54,6 +57,7 @@ func Test_addIntegerN(t *testing.T) {
 				r:              rand.New(rand.NewSource(0)),
 				numberOfAddend: 5,
 				sumMax:         5,
+				sumMin:         0,
 			},
 			want: AdditionResult{
 				Addends: []int64{1, 1, 1, 1, 1},
@@ -67,6 +71,7 @@ func Test_addIntegerN(t *testing.T) {
 				r:              rand.New(rand.NewSource(0)),
 				numberOfAddend: 2,
 				sumMax:         5,
+				sumMin:         0,
 			},
 			want: AdditionResult{
 				Addends: []int64{1, 2},
@@ -80,6 +85,7 @@ func Test_addIntegerN(t *testing.T) {
 				r:              rand.New(rand.NewSource(0)),
 				numberOfAddend: 2,
 				sumMax:         5,
+				sumMin:         0,
 			},
 			want: AdditionResult{
 				Addends: []int64{2, 1},
@@ -93,6 +99,7 @@ func Test_addIntegerN(t *testing.T) {
 				r:              rand.New(rand.NewSource(0)),
 				numberOfAddend: 3,
 				sumMax:         1000,
+				sumMin:         0,
 			},
 			want: AdditionResult{
 				Addends: []int64{133, 186, 213},
@@ -106,6 +113,7 @@ func Test_addIntegerN(t *testing.T) {
 				r:              rand.New(rand.NewSource(0)),
 				numberOfAddend: 3,
 				sumMax:         1000,
+				sumMin:         0,
 			},
 			want: AdditionResult{
 				Addends: []int64{228, 127, 177},
@@ -116,7 +124,7 @@ func Test_addIntegerN(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := addIntegerN(tt.args.r, tt.args.numberOfAddend, tt.args.sumMax)
+			got, err := addIntegerN(tt.args.r, tt.args.numberOfAddend, tt.args.sumMin, tt.args.sumMax)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("addIntegerN() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -147,7 +155,7 @@ func Test_addIntegerMass(t *testing.T) {
 	}
 	for i := 0; i < 10000; i++ {
 		t.Run(tt.name, func(t *testing.T) {
-			result, _ := addIntegerN(tt.args.r, tt.args.numberOfAddend, tt.args.sumMax)
+			result, _ := addIntegerN(tt.args.r, tt.args.numberOfAddend, 0, tt.args.sumMax)
 			var actualSum int64
 			for _, addend := range result.Addends {
 				actualSum += addend

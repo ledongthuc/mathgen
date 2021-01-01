@@ -49,28 +49,12 @@ h1, h2, h3, h4, h5, h6 {
   cursor: pointer;
 }
 
-.button-group button.checkButton {
-  display: none;
-}
-
-.button-group button.nextButton {
-  display: none;
-}
-
-.button-group button.loadingButton {
-  display: none;
-}
-
 .settingButton, .backButton {
   font-size: inherit;
   background: transparent;
   border: transparent;
   cursor: pointer;
   padding: 0px 15px;
-}
-
-.setting {
-  display: none;
 }
 
 .topics {
@@ -95,4 +79,22 @@ h1, h2, h3, h4, h5, h6 {
 
 .topic.active {
   background-color: #d2d2d2;
+}
+.settingAdditional {
+  width: 300px;
+  margin: 30px auto 0px auto;
+}
+.settingAdditional label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 6vmin;
+  margin-right: 20px;
+  width: 110px;
+  display: inline-block;
+}
+.settingAdditional input {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 6vmin;
+}
+.settingAdditional input[type=number] {
+  width: 50px;
 }

@@ -16,7 +16,6 @@ func main() {
 	e.Use(middleware.Logger())
 	e.Logger.SetLevel(log.INFO)
 	e.Use(middleware.CORS())
-	e.Renderer = routes.GetTemplate()
 	routes.SetupRoutes(e)
 	e.Logger.Info(e.Start(composeServerAddr()))
 }

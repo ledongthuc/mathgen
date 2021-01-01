@@ -2,16 +2,13 @@ package routes
 
 import (
 	"fmt"
-	"net/http"
 	"os"
 
 	"github.com/labstack/echo"
-	"github.com/ledongthuc/mathgen/web/messages"
 )
 
 func setupWebRoutes(g *echo.Group) {
 	g.Static("/", getAssetRootPath())
-	g.GET("/", rootHandler)
 	g.Static("/styles", getAssetStylePath())
 	g.Static("/scripts", getAssetScriptPath())
 	g.Static("/images", getAssetImagesPath())
@@ -43,8 +40,4 @@ func getAssetPath() string {
 		asset = "assets"
 	}
 	return asset
-}
-
-func rootHandler(c echo.Context) error {
-	return c.Render(http.StatusOK, "home", messages.GenerateWebMessage())
 }

@@ -7,7 +7,7 @@ import (
 )
 
 func ExampleAddIntegers() {
-	questionAndAnswers, _ := mathgen.AddIntegers(20)
+	questionAndAnswers, _ := mathgen.AddIntegers(0, 20)
 	fmt.Println("Addends:", questionAndAnswers.Addends)
 	fmt.Println("Sum:", questionAndAnswers.Sum)
 	fmt.Println("Print Question:", questionAndAnswers.StringQuestion())
@@ -15,7 +15,7 @@ func ExampleAddIntegers() {
 }
 
 func ExampleAddIntegerN() {
-	questionAndAnswers, _ := mathgen.AddIntegerN(3, 20)
+	questionAndAnswers, _ := mathgen.AddIntegerN(3, 0, 20)
 	fmt.Println("Addends:", questionAndAnswers.Addends)
 	fmt.Println("Sum:", questionAndAnswers.Sum)
 	fmt.Println("Print Question:", questionAndAnswers.StringQuestion())

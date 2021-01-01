@@ -45,31 +45,40 @@ func (a AdditionResult) StringQuestion() string {
 }
 
 // AddIntegers generate a operator with sum of 2 addends.
+// Parameter minSum defines minimum of Sum result, it should be less than max sum and greater than 0.
 // Parameter maxSum defines maxsimum of Sum result, it should be greater than 0.
 // If maxSum = 2, addends always is 1 + 1
-func AddIntegers(maxSum int64) (AdditionResult, error) {
-	return addIntegerN(getRand(), 2, maxSum)
+func AddIntegers(minSum, maxSum int64) (AdditionResult, error) {
+	return addIntegerN(getRand(), 2, minSum, maxSum)
 }
 
 // AddIntegerN generate a operator with sum.
 // Parameter numberOfAddends defines addends in question, it should be greater than 1.
+// Parameter minSum defines minimum of Sum result, it should be less than max sum and greater than 0.
 // Parameter maxSum defines maxsimum of Sum result, it should be greater than 0.
 // If maxSum is greater than or equal numberOfAddends. Question always has pattern: 1 + 1 + 1 ....
-func AddIntegerN(numberOfAddends int, maxSum int64) (AdditionResult, error) {
-	return addIntegerN(getRand(), numberOfAddends, maxSum)
+func AddIntegerN(numberOfAddends int, minSum, maxSum int64) (AdditionResult, error) {
+	return addIntegerN(getRand(), numberOfAddends, minSum, maxSum)
 }
 
 // addIntegerN generate a operator with sum.
 // r is  source of random numbers
 // Parameter numberOfAddends defines addends in question, it should be greater than 1.
+// Parameter minSum defines minimum of Sum result, it should be less than max sum and greater than 0.
 // Parameter maxSum defines maxsimum of Sum result, it should be greater than 0.
 // If maxSum is greater than or equal numberOfAddends. Question always has pattern: 1 + 1 + 1 ....
-func addIntegerN(r *rand.Rand, numberOfAddends int, maxSum int64) (AdditionResult, error) {
+func addIntegerN(r *rand.Rand, numberOfAddends int, minSum, maxSum int64) (AdditionResult, error) {
 	if numberOfAddends <= 1 {
 		return AdditionResult{}, errors.New("number of addend should be greater than 1")
 	}
 	if maxSum <= 1 {
 		return AdditionResult{}, errors.New("max sum should be greater than 0")
+	}
+	if minSum < 0 {
+		return AdditionResult{}, errors.New("min sum should be greater or equal than 0")
+	}
+	if minSum > maxSum {
+		return AdditionResult{}, errors.New("min sum should be lesser than max sum")
 	}
 	if maxSum <= int64(numberOfAddends) {
 		addends := make([]int64, maxSum, maxSum)
@@ -90,7 +99,10 @@ func addIntegerN(r *rand.Rand, numberOfAddends int, maxSum int64) (AdditionResul
 	}
 
 	// Real sum will be generated with (numberOfAddends:SumMax]
-	realSum := r.Int63n(maxSum+1-int64(numberOfAddends)) + int64(numberOfAddends)
+	if minSum < int64(numberOfAddends) {
+		minSum = int64(numberOfAddends)
+	}
+	realSum := r.Int63n(maxSum+1-minSum) + minSum
 	var calculatingSum int64
 	for index, fakeAddend := range result.Addends {
 		var addend int64

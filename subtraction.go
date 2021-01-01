@@ -73,7 +73,7 @@ func subtractIntegerN(r *rand.Rand, numberOfSubtrahends int, maxMinuend int64) (
 		return SubtractionResult{Minuend: maxMinuend, Subtrahends: subtrahends, Difference: 0}, nil
 	}
 
-	additionResult, err := addIntegerN(r, numberOfSubtrahends+1, maxMinuend)
+	additionResult, err := addIntegerN(r, numberOfSubtrahends+1, 0, maxMinuend)
 	if err != nil {
 		return SubtractionResult{}, err
 	}

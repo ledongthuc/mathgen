@@ -1,138 +1,102 @@
-let currentResult = {};
-let currentSetting;
-
-const defaultTopic = 'addition'
-const defaultRequestData = {
-  "number_of_addends": 2,
-  "max_sum": 20,
-};
-
-function composeRequestURL() {
-  const topic = currentSetting ? currentSetting.topic : defaultTopic;
-
-  return `/api/${topic}/generate`;
-}
-
-function composeRequestData() {
-  if(!currentSetting) return defaultRequestData;
-  switch(currentSetting.topic) {
-    case 'addition': return defaultRequestData;
-    case 'subtraction': return {
-        max_minuend: 20,
-        number_of_subtrahends: 1,
-    }
-  }
-}
-
-function getQuestion() {
-  $('#mathContent').html('');
-  $('#checkButton').attr("disabled");
-  $('#nextButton').attr("disabled");
-
-  $.ajax({
-      type: "POST",
-      url: composeRequestURL(),
-      data: JSON.stringify(composeRequestData()),
-      contentType: "application/json; charset=utf-8",
-      dataType: "json",
-      success: handleQuestion,
-      failure: handleError, 
-  });
-}
-
-function handleQuestion(data) {
-  if(JSON.stringify(data) === JSON.stringify(currentResult)) {
-    // To avoid duplicate random
-    getQuestion();
-    return;
-  }
-  currentResult = data;
-  const question = currentResult.question;
-  $('#mathContent').html(question);
-  $('#checkButton').css('display', 'block').removeAttr('disabled');
-  $('#nextButton').css('display', 'none').removeAttr('disabled');
-}
-
-function handleError(data) {
-  $('#mathContent').html('Problem occurs! try again');
-  $('#checkButton').css('display', 'none').removeAttr('disabled');
-  $('#nextButton').css('display', 'block').removeAttr('disabled');
-}
-
-function checkButtonClick() {
-  const result = currentResult.result;
-  $('#mathContent').html(result);
-  $('#checkButton').css('display', 'none');
-  $('#nextButton').css('display', 'block');
-}
-
-function nextButtonClick() {
-  getQuestion();
-}
-
-function settingButtonClick() {
-  $('#math').css('display', 'none');
-  $('#setting').css('display', 'block');
-}
-
-function backButtonClick() {
-  $('#math').css('display', 'block');
-  $('#setting').css('display', 'none');
-}
-
-function loadSetting() {
-  let topic = window.localStorage.getItem('topic');
-  topic = topic ? topic : defaultTopic;
-  return {
-    topic,
-  }
-}
-
-function setSetting(setting) {
-  window.localStorage.setItem('topic', setting.topic);
-  currentSetting = setting;
-  updateTopicStatus(setting);
-  getQuestion();
-}
-
-function updateTopicStatus(setting) {
-  $(".topic").removeClass('active').each(function(index, topicElement) {
-    const topic = $(this).attr('topic');
-    const currentTopic = setting.topic;
-      if(topic === currentTopic) {
-        $(this).addClass('active')
-      }
-  });
-}
-
-function topicButtonClick() {
-  const topic = $(this).attr('topic');
-  setSetting({ ...currentSetting, topic })
-}
-
 let wakeLockObj = null;
 function acquireWakeup() {
-  if ('keepAwake' in screen) {
-      screen.keepAwake = true;
-  } else if ('wakeLock' in navigator) {
-    navigator.wakeLock.request('screen').then((wakeLock) => {
+  if ("keepAwake" in screen) {
+    screen.keepAwake = true;
+  } else if ("wakeLock" in navigator) {
+    navigator.wakeLock.request("screen").then((wakeLock) => {
       wakeLockObj = wakeLock;
-      wakeLockObj.addEventListener('release', () => {
+      wakeLockObj.addEventListener("release", () => {
         wakeLockObj = null;
       });
-    })
+    });
   }
 }
 
 $(document).ready(() => {
-  currentSetting = loadSetting();
-  updateTopicStatus(currentSetting);
-  getQuestion();
-  $('#checkButton').bind('click', checkButtonClick); 
-  $('#nextButton').bind('click', nextButtonClick); 
-  $('#settingButton').bind('click', settingButtonClick); 
-  $('#backButton').bind('click', backButtonClick); 
-  $('.topic').bind('click', topicButtonClick);
   $(window).focus(acquireWakeup);
   acquireWakeup();
 });
+
+const RootComponent = {
+	data() {
+		return {
+      loading: true,
+      checked: false,
+      item: {
+        question: '',
+        result: '',
+      },
+      showSetting: false,
+      settings: {
+        currentTopic: 'addition',
+        addition: {
+          number_of_addends: 2,
+          max_sum: 20,
+          min_sum: 20,
+        },
+        subtraction: {
+          max_minuend: 20,
+          number_of_subtrahends: 1,
+        },
+      },
+		};
+	},
+  computed: {
+    activeAddition() {
+      return this.settings.currentTopic === 'addition' ? 'active' : '';
+    },
+    activeSubtraction() {
+      return this.settings.currentTopic === 'subtraction' ? 'active' : '';
+    },
+    composeRequestURL() {
+      return `/api/${this.settings.currentTopic}/generate`;
+    },
+    composeRequestData() {
+      return this.settings[this.settings.currentTopic];
+    }
+  },
+  mounted() {
+    this.loadSetting();
+    this.getQuestion();
+  },
+  methods: {
+    getQuestion() {
+      $.ajax({
+        type: "POST",
+        url: this.composeRequestURL,
+        data: JSON.stringify(this.composeRequestData),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: this.handleQuestionResult,
+      });
+    },
+    handleQuestionResult(data) {
+      if (JSON.stringify(data) === JSON.stringify(this.item)) {
+        this.getQuestion();
+        return;
+      }
+      this.item = data;
+      this.loading = false;
+      this.checked = false;
+    },
+    check() {
+      this.checked = true;
+    },
+    changeTopic(currentTopic) {
+      this.setSetting({ ...this.settings, currentTopic });
+      this.getQuestion();
+    },
+    loadSetting() {
+      const loadedSettings = localStorage.settings;
+      if(loadedSettings) {
+        this.settings = JSON.parse(loadedSettings);
+      }
+    },
+    setSetting(settings) {
+      localStorage.settings = JSON.stringify(settings);
+      this.settings = settings;
+    },
+  },
+};
+const app = Vue.createApp(RootComponent);
+const vm = app.mount("#app");
