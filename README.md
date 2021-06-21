@@ -1,6 +1,6 @@
 # Math generator
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/ledongthuc/mathgen)](https://goreportcard.com/report/github.com/ledongthuc/mathgen) [![GoDoc](https://godoc.org/github.com/ledongthuc/mathgen?status.svg)](https://godoc.org/github.com/ledongthuc/mathgen)
+[![Built with WeBuild](https://raw.githubusercontent.com/webuild-community/badge/master/svg/WeBuild.svg)](https://webuild.community) [![Go Report Card](https://goreportcard.com/badge/github.com/ledongthuc/mathgen)](https://goreportcard.com/report/github.com/ledongthuc/mathgen) [![GoDoc](https://godoc.org/github.com/ledongthuc/mathgen?status.svg)](https://godoc.org/github.com/ledongthuc/mathgen)
 
 As a dad, I frequently to play math quiz with my daughter.
 Bu I'm too lazy to frequently to create math questions. This' reason why I create this lib/api/web, that I can help me to generate questions.
